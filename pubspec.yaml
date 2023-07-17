@@ -1,6 +1,6 @@
 name: better_player
 description: Advanced video player based on video_player and Chewie. It's solves many typical use cases and it's easy to run.
-version: 0.0.83
+version: 0.0.84
 # Disabled because of warning from analyzer
 # authors:
 #  - Jakub Homlala <jhomlala@gmail.com>
@@ -21,7 +21,7 @@ dependencies:
   visibility_detector: ^0.3.3
   path_provider: ^2.0.10
   collection: ^1.16.0
-  xml: ^6.1.0
+  xml: ^6.3.0
 
 dev_dependencies:
   lint: ^1.8.2
