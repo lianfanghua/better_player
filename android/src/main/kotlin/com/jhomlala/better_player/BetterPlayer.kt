@@ -411,23 +411,35 @@ internal class BetterPlayer(
             C.TYPE_SS -> SsMediaSource.Factory(
                 DefaultSsChunkSource.Factory(mediaDataSourceFactory),
                 DefaultDataSource.Factory(context, mediaDataSourceFactory)
-            )
-                .setDrmSessionManagerProvider(drmSessionManagerProvider)
+            ).apply {
+                if (drmSessionManagerProvider != null) {
+                    setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                }
+            }
                 .createMediaSource(mediaItem)
             C.TYPE_DASH -> DashMediaSource.Factory(
                 DefaultDashChunkSource.Factory(mediaDataSourceFactory),
                 DefaultDataSource.Factory(context, mediaDataSourceFactory)
-            )
-                .setDrmSessionManagerProvider(drmSessionManagerProvider)
+            ).apply {
+                if (drmSessionManagerProvider != null) {
+                    setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                }
+            }
                 .createMediaSource(mediaItem)
-            C.TYPE_HLS -> HlsMediaSource.Factory(mediaDataSourceFactory)
-                .setDrmSessionManagerProvider(drmSessionManagerProvider)
+            C.TYPE_HLS -> HlsMediaSource.Factory(mediaDataSourceFactory).apply {
+                if (drmSessionManagerProvider != null) {
+                    setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                }
+            }
                 .createMediaSource(mediaItem)
             C.TYPE_OTHER -> ProgressiveMediaSource.Factory(
                 mediaDataSourceFactory,
                 DefaultExtractorsFactory()
-            )
-                .setDrmSessionManagerProvider(drmSessionManagerProvider)
+            ).apply {
+                if (drmSessionManagerProvider != null) {
+                    setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                }
+            }
                 .createMediaSource(mediaItem)
             else -> {
                 throw IllegalStateException("Unsupported type: $type")
