@@ -401,7 +401,7 @@ internal class BetterPlayer(
             mediaItemBuilder.setCustomCacheKey(cacheKey)
         }
         val mediaItem = mediaItemBuilder.build()
-        var drmSessionManagerProvider: DrmSessionManagerProvider? = null
+        DefaultDrmSessionManagerProvider drmSessionManagerProvider = new DefaultDrmSessionManagerProvider();
         drmSessionManager?.let { drmSessionManager ->
             drmSessionManagerProvider = DrmSessionManagerProvider { drmSessionManager }
         }
@@ -412,7 +412,7 @@ internal class BetterPlayer(
                 DefaultDataSource.Factory(context, mediaDataSourceFactory)
             ).apply {
                 if (drmSessionManagerProvider != null) {
-                    setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                    setDrmSessionManagerProvider(drmSessionManagerProvider)
                 }
             }.createMediaSource(mediaItem)
             C.CONTENT_TYPE_DASH -> DashMediaSource.Factory(
@@ -420,13 +420,13 @@ internal class BetterPlayer(
                 DefaultDataSource.Factory(context, mediaDataSourceFactory)
             ).apply {
                 if (drmSessionManagerProvider != null) {
-                    setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                    setDrmSessionManagerProvider(drmSessionManagerProvider)
                 }
             }.createMediaSource(mediaItem)
             C.CONTENT_TYPE_HLS -> HlsMediaSource.Factory(mediaDataSourceFactory)
                 .apply {
                     if (drmSessionManagerProvider != null) {
-                        setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                        setDrmSessionManagerProvider(drmSessionManagerProvider)
                     }
                 }.createMediaSource(mediaItem)
             C.CONTENT_TYPE_OTHER -> ProgressiveMediaSource.Factory(
@@ -434,7 +434,7 @@ internal class BetterPlayer(
                 DefaultExtractorsFactory()
             ).apply {
                 if (drmSessionManagerProvider != null) {
-                    setDrmSessionManagerProvider(drmSessionManagerProvider!!)
+                    setDrmSessionManagerProvider(drmSessionManagerProvider)
                 }
             }.createMediaSource(mediaItem)
             else -> {
