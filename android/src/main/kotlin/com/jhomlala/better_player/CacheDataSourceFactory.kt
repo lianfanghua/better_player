@@ -25,7 +25,8 @@ internal class CacheDataSourceFactory(
             FileDataSource(),
             CacheDataSink(betterPlayerCache, maxFileSize),
             CacheDataSource.FLAG_BLOCK_ON_CACHE or CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR,
-            null
+            null,
+            CustomCacheKeyFactory()
         )
     }
 
